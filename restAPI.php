@@ -17,10 +17,10 @@
     $alias = false;
 
     if (isset($endpoint[1])) {
-        if (preg_match('/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/', $endpoint2)) {
-            $id = $endpoint2;
+        if (preg_match('/\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b/', $endpoint[1])) {
+    $id = $endpoint[1];
         } else {
-            $alias = $endpoint2;
+    $alias = $endpoint[1];
         }
     }
     
