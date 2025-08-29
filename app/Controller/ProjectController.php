@@ -25,6 +25,11 @@ class ProjectController {
 
         echo "<br>";
 
+        // Check if data is not empty before displaying table
+        if (empty($data)) {
+            echo "No projects found.";
+            return;
+        }
         
         // Display the data in a table format
         echo '<table border="1" cellpadding="5" cellspacing="0">';

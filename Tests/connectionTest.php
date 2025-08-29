@@ -2,7 +2,8 @@
 <?php
 use App\Config\Database;
 
-require_once __DIR__ . '/../App/Config/Database.php'; // Adjusted to use a relative path
+// Include the autoloader
+require_once __DIR__ . '/../autoloader.php';
 
 try {
     // Create an instance of the Database class

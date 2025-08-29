@@ -1,13 +1,7 @@
 <?php 
     session_start();
 
-    spl_autoload_register(function ($className) {
-        if (substr($className, 0, 4) !== 'ppb\\') { return; }
-
-        $fileName = __DIR__.'/'.str_replace('\\', DIRECTORY_SEPARATOR, substr($className, 4)).'.php';
-
-        if (file_exists($fileName)) { include $fileName; }
-    });    
+    require_once __DIR__ . '/autoloader.php';    
    
     $endpoint = explode('/', trim($_SERVER['PATH_INFO'],'/'));
     $data = json_decode(file_get_contents('php://input'), true);
@@ -24,7 +18,7 @@
         }
     }
     
-    $controllerClassName = 'ppb\\Controller\\'.ucfirst($controllerName). 'Controller';
+    $controllerClassName = 'App\\Controller\\'.ucfirst($controllerName). 'Controller';
     
     if ($_SERVER['REQUEST_METHOD'] == "DELETE") {
         $methodName = "delete" . ucfirst($controllerName);
