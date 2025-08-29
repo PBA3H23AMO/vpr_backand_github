@@ -1,26 +1,22 @@
 <?php
 
+// Include the autoloader
+require_once __DIR__ . '/../autoloader.php';
+
+use App\Controller\ProjectController;
+
 class ControllerTester
 {
-    public function testController($controllerPath, $methodName, $params = [])
+    public function testController($controllerClass, $methodName, $params = [])
     {
-        if (!file_exists($controllerPath)) {
-            return "Error: Controller file not found at path: $controllerPath";
+        if (!class_exists($controllerClass)) {
+            return "Error: Class $controllerClass not found.";
         }
 
-        require_once $controllerPath;
-
-        // Extract the class name from the file path
-        $className = basename($controllerPath, '.php');
-
-        if (!class_exists($className)) {
-            return "Error: Class $className not found in the controller file.";
-        }
-
-        $controller = new $className();
+        $controller = new $controllerClass();
 
         if (!method_exists($controller, $methodName)) {
-            return "Error: Method $methodName not found in class $className.";
+            return "Error: Method $methodName not found in class $controllerClass.";
         }
 
         // Call the method with parameters
@@ -30,11 +26,11 @@ class ControllerTester
 
 // Example usage
 $tester = new ControllerTester();
-$controllerPath = '../App/Controller/ProjectController.php'; // Path to the controller file
-$methodName = 'getAllRecords'; // Replace with the method you want to test
+$controllerClass = 'App\Controller\ProjectController'; // Use fully qualified class name
+$methodName = 'getProject'; // Replace with the method you want to test
 $params = []; // Replace with the parameters for the method
 
-$result = $tester->testController($controllerPath, $methodName, $params);
+$result = $tester->testController($controllerClass, $methodName, $params);
 echo '<pre>';
 print_r($result);
 echo '</pre>';
